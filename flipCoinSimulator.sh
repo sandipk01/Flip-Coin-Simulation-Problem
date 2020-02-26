@@ -4,16 +4,27 @@
 #CONSTANTS
 IS_HEAD=0
 IS_TAILS=1
-
+plays=10
 #VARIABLES
+declare -A singleCoin
 randomNumber=0
-
-#GENRATE RANDOM NUMBER
-randomNumber=$(( RANDOM % 2 ))
-if [ $randomNumber -eq $IS_HEAD ]
-   then
-      printf "HEAD\n"
-   else
-      printf "TAILS\n"
+singleCoin[H]=0
+singleCoin[T]=0
+for (( index=1; index<=10; index++ ))
+do
+	randomNumber=$(( RANDOM % 2 ))
+   if [ $randomNumber -eq $IS_HEAD ]
+      then
+         singleCoin[H]=$(( "${singleCoin[H]}" + 1 ))
+      else
+         singleCoin[T]=$(( "${singleCoin[T]}" + 1 ))
 fi
+done
+
+echo  ${singleCoin[@]}
+
+head=`expr "scale=3; ( ${singleCoin[H]} / 10 ) * 100" | bc -l`
+tails=`expr "scale=3; ( ${singleCoin[T]} / 10 ) * 100" | bc -l`
+
+printf "head percentage: $head \ntails percantage: $tails \n"
 
