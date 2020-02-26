@@ -4,13 +4,17 @@
 #CONSTANTS
 IS_HEAD=0
 IS_TAILS=1
-plays=10
+plays=0
 #VARIABLES
 declare -A singleCoin
 randomNumber=0
 singleCoin[H]=0
 singleCoin[T]=0
-for (( index=1; index<=10; index++ ))
+
+printf "Enter How many times you want to flip the coin:\n"
+read plays
+
+for (( index=1; index<=$plays; index++ ))
 do
 	randomNumber=$(( RANDOM % 2 ))
    if [ $randomNumber -eq $IS_HEAD ]
@@ -23,8 +27,8 @@ done
 
 echo  ${singleCoin[@]}
 
-head=`expr "scale=3; ( ${singleCoin[H]} / 10 ) * 100" | bc -l`
-tails=`expr "scale=3; ( ${singleCoin[T]} / 10 ) * 100" | bc -l`
+head=`expr "scale=3; ( ${singleCoin[H]} / $plays ) * 100" | bc -l`
+tails=`expr "scale=3; ( ${singleCoin[T]} / $plays ) * 100" | bc -l`
 
 printf "head percentage: $head \ntails percantage: $tails \n"
 
