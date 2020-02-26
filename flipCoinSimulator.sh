@@ -39,17 +39,17 @@ do
    randomNumber=$(( RANDOM % 2 ))
 	randomNumber2=$(( RANDOM % 2 ))
    if [ $randomNumber -eq $IS_HEAD -a $randomNumber2 -eq $IS_HEAD ]
-      then
-         coin[HH]=$(( "${coin[HH]}" + 1 ))
+   	then
+      	coin[HH]=$(( "${coin[HH]}" + 1 ))
       elif [ $randomNumber -eq $IS_HEAD -a $randomNumber2 -eq $IS_TAILS ]
-      	then
-				coin[HT]=$(( "${coin[HT]}" + 1 ))
-			elif [ $randomNumber -eq $IS_TAILS -a $randomNumber2 -eq $IS_HEAD ]
-				then
-					coin[TH]=$(( "${coin[TH]}" + 1 ))
-				elif [ $randomNumber -eq $IS_TAILS -a $randomNumber2 -eq $IS_TAILS ]
-					then
-						coin[TT]=$(( "${coin[TT]}" + 1 ))
+      then
+			coin[HT]=$(( "${coin[HT]}" + 1 ))
+		elif [ $randomNumber -eq $IS_TAILS -a $randomNumber2 -eq $IS_HEAD ]
+		then
+			coin[TH]=$(( "${coin[TH]}" + 1 ))
+		elif [ $randomNumber -eq $IS_TAILS -a $randomNumber2 -eq $IS_TAILS ]
+		then
+			coin[TT]=$(( "${coin[TT]}" + 1 ))
 	fi
 done
 
