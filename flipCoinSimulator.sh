@@ -22,6 +22,8 @@ coin[HTT]=0
 coin[TTT]=0
 coin[THH]=0
 coin[TTH]=0
+coin[THT]=0
+coin[HTH]=0
 printf "Enter How many times you want to flip the coin:\n"
 read plays
 
@@ -82,8 +84,14 @@ do
       then
 				coin[THH]=$(( "${coin[THH]}" + 1 ))
 		elif [ $randomNumber -eq $IS_TAILS -a $randomNumber2 -eq $IS_TAILS -a $randomNumber3 -eq $IS_HEAD ]
-      then 
+      then
 				coin[TTH]=$(( "${coin[THH]}" + 1 ))
+		elif [ $randomNumber -eq $IS_TAILS -a $randomNumber2 -eq $IS_HEAD -a $randomNumber3 -eq $IS_TAILS ]
+      then
+            coin[THT]=$(( "${coin[THT]}" + 1 ))
+		elif [ $randomNumber -eq $IS_HEAD -a $randomNumber2 -eq $IS_TAILS -a $randomNumber3 -eq $IS_HEAD ]
+      then
+            coin[HTH]=$(( "${coin[HTH]}" + 1 ))
 	fi
 done
 
@@ -101,8 +109,17 @@ HTT=`expr "scale=3; ( ${coin[HTT]} / $plays ) * 100" | bc -l`
 TTT=`expr "scale=3; ( ${coin[TTT]} / $plays ) * 100" | bc -l`
 THH=`expr "scale=3; ( ${coin[THH]} / $plays ) * 100" | bc -l`
 TTH=`expr "scale=3; ( ${coin[TTH]} / $plays ) * 100" | bc -l`
+THT=`expr "scale=3; ( ${coin[THT]} / $plays ) * 100" | bc -l`
+HTH=`expr "scale=3; ( ${coin[HTH]} / $plays ) * 100" | bc -l`
 
 printf "H percentage: $H \nT percentage: $T \n"
 printf "HH percentage: $HH \nHT percentage: $HT \nTT percentage: $TT\nTH percentage: $TH\n"
-printf "HHH prcentage: $HHH \nHHT percentage: $HHT \nHTT percentage: $HTT \nTTT percentage: $TTT \nTHH percentage : $THH \nTTH percentage: $TTH \n"
+printf "HHH prcentage: $HHH \nHHT percentage: $HHT \nHTT percentage: $HTT \nTTT percentage: $TTT \nTHH percentage : $THH \nTTH percentage: $TTH \nTHT percentage: $THT \nHTH percentage: $HTH\n"
+
+
+for k in ${!coin[@]}
+do
+	echo $k ' - ' ${coin["$k"]}
+done |
+	sort -rn -k3
 
