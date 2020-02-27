@@ -117,9 +117,4 @@ printf "HH percentage: $HH \nHT percentage: $HT \nTT percentage: $TT\nTH percent
 printf "HHH prcentage: $HHH \nHHT percentage: $HHT \nHTT percentage: $HTT \nTTT percentage: $TTT \nTHH percentage : $THH \nTTH percentage: $TTH \nTHT percentage: $THT \nHTH percentage: $HTH\n"
 
 
-for k in ${!coin[@]}
-do
-	echo $k ' - ' ${coin["$k"]}
-done |
-	sort -rn -k3
 
