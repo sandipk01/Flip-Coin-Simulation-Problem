@@ -42,7 +42,7 @@ done
 
 #DOUBLE COIN FLIP
 
-for (( index=1; index<=$plays; index++ ))
+for (( index=1; index<=$plays*2; index++ ))
 do
    randomNumber=$(( RANDOM % 2 ))
 	randomNumber2=$(( RANDOM % 2 ))
@@ -63,7 +63,7 @@ done
 
 #TRIPLE COIN FLIP
 
-for (( index=0; index<=$plays; index++ ))
+for (( index=0; index<=$plays*3; index++ ))
 do
 	randomNumber=$(( RANDOM % 2 ))
    randomNumber2=$(( RANDOM % 2 ))
@@ -117,4 +117,22 @@ printf "HH percentage: $HH \nHT percentage: $HT \nTT percentage: $TT\nTH percent
 printf "HHH prcentage: $HHH \nHHT percentage: $HHT \nHTT percentage: $HTT \nTTT percentage: $TTT \nTHH percentage : $THH \nTTH percentage: $TTH \nTHT percentage: $THT \nHTH percentage: $HTH\n"
 
 
+printf "sorted combinations are :\n"
+#SORT
+for k in "${!coin[@]}"
+do
+   echo "$k" "-"  ${coin["$k"]}
+done |
+sort -n -k3
+
+max=0
+for k in ${!coin[@]}
+do
+	if [ $max -lt ${coin["$k"]} ]
+		then
+			max=${coin["$k"]}
+			key="$k"
+	fi
+done
+printf "Winning  combinations are :  $key -- $max \n"
 
